@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1038</width>
+    <height>706</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="toolTip">
+   <string/>
+  </property>
+  <property name="whatsThis">
+   <string/>
+  </property>
+  <property name="accessibleName">
+   <string/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(25, 25, 25);</string>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMinAndMaxSize</enum>
+      </property>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="styleSheet">
+             <string notr="true">font: 12pt &quot;Consolas&quot;;
+color: rgb(255, 255, 255);
+background-color: rgb(25, 25, 25);</string>
+            </property>
+            <property name="text">
+             <string>代码</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextBrowser" name="codes">
+            <property name="styleSheet">
+             <string notr="true">font: 12pt &quot;Consolas&quot;;
+color: rgb(255, 255, 255);
+background-color: rgb(45, 45, 45);</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="styleSheet">
+             <string notr="true">font: 12pt &quot;Consolas&quot;;
+color: rgb(255, 255, 255);
+background-color: rgb(25, 25, 25);</string>
+            </property>
+            <property name="text">
+             <string>运行结果</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextBrowser" name="result">
+            <property name="styleSheet">
+             <string notr="true">font: 12pt &quot;Consolas&quot;;
+color: rgb(255, 255, 255);
+background-color: rgb(45, 45, 45);</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="styleSheet">
+         <string notr="true">font: 12pt &quot;Consolas&quot;;
+color: rgb(255, 255, 255);
+background-color: rgb(25, 25, 25);</string>
+        </property>
+        <property name="text">
+         <string>语句与语法树</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTextBrowser" name="tree">
+        <property name="toolTip">
+         <string extracomment="代码"/>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 12pt &quot;Consolas&quot;;
+color: rgb(255, 255, 255);
+background-color: rgb(45, 45, 45);</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QPushButton" name="LoadButton">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>200</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 75 12pt &quot;Arial&quot;;
+color: rgb(255, 255, 255);
+background-color: rgb(25, 25, 25);
+selection-background-color: rgb(74, 74, 74);
+</string>
+          </property>
+          <property name="text">
+           <string>载入代码</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="SaveButton">
+          <property name="maximumSize">
+           <size>
+            <width>200</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 75 12pt &quot;Arial&quot;;
+color: rgb(255, 255, 255);
+background-color: rgb(25, 25, 25);
+selection-background-color: rgb(74, 74, 74);
+</string>
+          </property>
+          <property name="text">
+           <string>保存代码</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="RunButton">
+          <property name="maximumSize">
+           <size>
+            <width>200</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 12pt &quot;Consolas&quot;;
+color: rgb(255, 255, 255);
+background-color: rgb(25, 25, 25);</string>
+          </property>
+          <property name="text">
+           <string>执行代码</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="ClearButton">
+          <property name="maximumSize">
+           <size>
+            <width>200</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 12pt &quot;Consolas&quot;;
+color: rgb(255, 255, 255);
+background-color: rgb(25, 25, 25);</string>
+          </property>
+          <property name="text">
+           <string>清空代码</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="label_4">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 12pt &quot;Consolas&quot;;
+color: rgb(255, 255, 255);
+background-color: rgb(25, 25, 25);</string>
+          </property>
+          <property name="text">
+           <string>命令输入窗口</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QTextBrowser" name="Tips">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 75 10pt &quot;Consolas&quot;;
+color: rgb(255, 0, 0);</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QPlainTextEdit" name="orders">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 12pt &quot;Consolas&quot;;
+color: rgb(255, 255, 255);
+background-color: rgb(45, 45, 45);</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
