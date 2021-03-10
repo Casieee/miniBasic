@@ -15,6 +15,7 @@ class Statement
 public:
     Statement() {}
     virtual StatementType type() = 0;
+    virtual QStringList toString() = 0;
 
     virtual int goToLine() {return 0;}
     virtual int getResult() {return 0;}
@@ -27,6 +28,7 @@ class LetStatement : public Statement {
 public:
     LetStatement(QList<token> exp, EvaluationContext &context);
     StatementType type();
+    QStringList toString();
 
     ~LetStatement(){}
 
@@ -39,6 +41,7 @@ class PrintStatement : public Statement {
 public:
     PrintStatement(QList<token> exp, EvaluationContext &context);
     StatementType type();
+    QStringList toString();
     int getResult();
 
     ~PrintStatement(){}
@@ -53,6 +56,7 @@ class IfStatement : public Statement {
 public:
     IfStatement(QList<token> exp1, QList<token> exp2, EvaluationContext &context);
     StatementType type();
+    QStringList toString();
     bool ifFlag();
 
     ~IfStatement(){}
@@ -60,6 +64,7 @@ public:
 private:
     bool flag;
     parse tool;
+    QStringList parseTree;
     QString expression;
     Expression* ifExp;
     Expression* thenExp;

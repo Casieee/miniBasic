@@ -34,8 +34,10 @@ int ConstantExpression::eval(EvaluationContext &context) {
     return value;
 }
 
-QString ConstantExpression::toString() {
-    return QString::number(value);
+QStringList ConstantExpression::toString() {
+    QStringList constant;
+    constant.append(QString::number(value));
+    return constant;
 }
 
 ExpressionType ConstantExpression::type() {
@@ -46,12 +48,14 @@ IdentifierExp::IdentifierExp(QString name): name(name) {}
 
 int IdentifierExp::eval(EvaluationContext &context) {
     if(!context.isDefined(name))
-        qDebug() << "undefined error";
+       throw "UNDEFINED IDENTIFIER";
     return context.getValue(name);
 }
 
-QString IdentifierExp::toString() {
-    return name;
+QStringList IdentifierExp::toString() {
+    QStringList iden;
+    iden.append(name);
+    return iden;
 }
 
 ExpressionType IdentifierExp::type() {
@@ -98,11 +102,17 @@ ExpressionType CompoundExp::type() {
     return COMPOUND;
 }
 
-QString CompoundExp::toString() {
-    QString str;
-    str.append(lhs->toString());
+QStringList CompoundExp::toString() {
+    QStringList str, lstr = lhs->toString(), rstr = rhs->toString();
     str.append(op.toString());
-    str.append(rhs->toString());
+    for(int i = 0; i < lstr.length(); i++) {
+        lstr[i].insert(0,'\t');
+    }
+    str.append(lstr);
+    for(int i = 0; i < rstr.length(); i++) {
+        rstr[i].insert(0,'\t');
+    }
+    str.append(rstr);
     return str;
 }
 

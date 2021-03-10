@@ -14,7 +14,7 @@ public:
     Expression() {}
     virtual ~Expression(){}
     virtual int eval(EvaluationContext & context) = 0;
-    virtual QString toString() = 0;
+    virtual QStringList toString() = 0;
     virtual ExpressionType type() = 0;
     virtual QString getIdentifierName() {return "";}
     virtual QString getOperator() {return "";}
@@ -28,7 +28,7 @@ public:
     ConstantExpression(int number);
     ~ConstantExpression();
     int eval(EvaluationContext &context);
-    QString toString();
+    QStringList toString();
     ExpressionType type();
 
 private:
@@ -40,7 +40,7 @@ public:
     IdentifierExp(QString name);
     ~IdentifierExp() {}
     int eval(EvaluationContext &context);
-    QString toString();
+    QStringList toString();
     ExpressionType type();
     QString getIdentifierName();
 
@@ -53,7 +53,7 @@ public:
     CompoundExp(token op, Expression *lhs, Expression *rhs);
     ~CompoundExp() {}
     int eval(EvaluationContext &context);
-    QString toString();
+    QStringList toString();
     ExpressionType type();
     QString getOperator();
     Expression* getLHS();

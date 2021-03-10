@@ -49,10 +49,6 @@ void MainWindow::runProgram() {
             if(Program.executeLine == 0) {
                 QStringList cmdParts = (*ite).split(' ');
                 Program.executeCommand(cmdParts);
-                if(Program.ifEnd) {
-                    ui->Tips->setText("<font color=\"#00ff00\">ENDED NORMALLY");
-                    break;
-                }
                 if(Program.newResult) {
                     ui->result->append(QString::number(Program.result));
                     Program.newResult = false;
@@ -60,10 +56,23 @@ void MainWindow::runProgram() {
                 if(Program.ifInput) {
                     askForInput(Program.inputIden);
                 }
+                if(Program.ifEnd || (ite+1) == codes.end()) {
+                    ui->tree->clear();
+                    for(auto string: Program.getTree()) {
+                        ui->tree->append(string);
+                    }
+                    ui->Tips->setText("<font color=\"#00ff00\">ENDED NORMALLY");
+                    break;
+                }
                 ite++;
             }
             else {
-                ite = codes.find(Program.executeLine);
+                if(codes.contains(Program.executeLine)) {
+                    ite = codes.find(Program.executeLine);
+                }
+                else {
+                    throw "NO MATCHING LINENUMBER";
+                }
                 Program.executeLine = 0;
                 continue;
             }
@@ -75,44 +84,77 @@ void MainWindow::runProgram() {
 }
 
 void MainWindow::loadProgram() {
-    QString fileName;
-    fileName = QFileDialog::getOpenFileName(this,tr("Open File"),tr(""),tr("Text File (*.txt)"));
-    if(fileName == "") {
-        return;
-    }
-    else {
-        QFile file(fileName);
-        if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            QMessageBox::warning(this, tr("错误"), tr("打开文件失败"));
+    try {
+        QString fileName;
+        fileName = QFileDialog::getOpenFileName(this,tr("Open File"),tr(""),tr("Text File (*.txt)"));
+        if(fileName == "") {
             return;
         }
         else {
-            QTextStream textStream(&file);
-            while (!textStream.atEnd()) {
-                QString command = textStream.readLine();
-                if(command[0] >= '0' && command[0] <= '9') {
-                    int number = 0;
-                    QString charNum;
-                    for(int i = 0; i < command.length() && command[i] >= '0' && command[i] <= '9'; i++) {
-                        charNum.append(command[i]);
-                    }
-                    number = charNum.toInt();
+            QFile file(fileName);
+            if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+                throw "CANNOT OPEN FILE";
+            }
+            else {
+                QTextStream textStream(&file);
+                while (!textStream.atEnd()) {
+                    QString command = textStream.readLine();
+                    if(command[0] >= '0' && command[0] <= '9') {
+                        int number = 0;
+                        QString charNum;
+                        for(int i = 0; i < command.length() && command[i] >= '0' && command[i] <= '9'; i++) {
+                            charNum.append(command[i]);
+                        }
+                        number = charNum.toInt();
 
-                    if(command.length() != charNum.length()) {
-                        codes.insert(number, command);
+                        if(command.length() != charNum.length()) {
+                            codes.insert(number, command);
+                        }
                     }
                 }
-            }
-            file.close();
-            ui->codes->clear();
-            for(auto value: codes) {
-                ui->codes->append(value);
+                file.close();
+                ui->codes->clear();
+                for(auto value: codes) {
+                    ui->codes->append(value);
+                }
+                ui->Tips->setText("<font color=\"#00ff00\">OPEN FILE SUCCESSFULLY");
             }
         }
+    }  catch (const char * error) {
+        ui->Tips->setText(error);
     }
+
 }
 
 void MainWindow::saveCodes() {
+    try {
+        if(ui->codes->toPlainText() == "") {
+            throw "THE CONTENT CANNOT BE EMPTY";
+        }
+        else {
+            QFileDialog fileDialog;
+            QString str = fileDialog.getSaveFileName(this,tr("Open File"),"/newFile",tr("Text File(*.txt)"));
+            if(str == "") {
+                return;
+            }
+            QFile filename(str);
+            if(!filename.open(QIODevice::WriteOnly | QIODevice::Text)) {
+                throw "FAILED TO OPEN FILE";
+            }
+            else {
+                QTextStream textStream(&filename);
+                for(auto string: codes) {
+                    textStream << string;
+                    textStream << "\n";
+                }
+                filename.close();
+                ui->Tips->setText("<font color=\"#00ff00\">SAVE FILE SUCCESSFULLY");
+            }
+
+        }
+    }  catch (const char* error) {
+        ui->Tips->setText(error);
+    }
 
 }
 
@@ -194,6 +236,11 @@ void MainWindow::handleReturnPressed() {
         }
         if(cmd == "CLEAR") {
             clear();
+            return;
+        }
+        if(cmd == "SAVE") {
+            ui->orders->clear();
+            saveCodes();
             return;
         }
         if(cmd == "QUIT") {

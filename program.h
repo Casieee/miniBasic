@@ -15,6 +15,7 @@ public:
     void executeCommand(QStringList cmdParts);
     void endProgram();
     void clear();
+    QStringList getTree();
 
     void ChangeContext(QString name, int value);
 
@@ -27,6 +28,7 @@ public:
 
 private:
     Statement* stat;
+    QStringList tree;
     tokenize tool;
     EvaluationContext context;
 };
