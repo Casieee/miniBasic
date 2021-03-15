@@ -14,7 +14,8 @@ Expression* parse::analyzeResult(QList<token> expression) {
         token pre = expression[i];
         switch (pre.getType()) {
         case NEGATIVE:
-
+            opStack.push(pre);
+            break;
         case ADD: case SUB:
         {
             while (!opStack.isEmpty()&& opStack.top().getType() != EQUAL && opStack.top().getType() != LEFTPARE) {
@@ -91,6 +92,7 @@ Expression* parse::analyzeResult(QList<token> expression) {
                     Expression* constant0 = new ConstantExpression(0);
                     tmp = new CompoundExp(inPare, constant0, operand);
                     expStack.push(tmp);
+                    inPare = opStack.pop();
                 }
                 else {
                     Expression* operand2 = expStack.pop();

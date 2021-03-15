@@ -61,7 +61,7 @@ void MainWindow::runProgram() {
                     for(auto string: Program.getTree()) {
                         ui->tree->append(string);
                     }
-                    ui->Tips->setText("<font color=\"#00ff00\">ENDED NORMALLY");
+                    Program.clear();
                     break;
                 }
                 ite++;

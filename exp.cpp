@@ -1,5 +1,6 @@
 #include "exp.h"
 #include <QDebug>
+#include <cmath>
 
 void EvaluationContext::setValue(QString var, int value) {
     symbolTable.insert(var, value);
@@ -87,10 +88,7 @@ int CompoundExp::eval(EvaluationContext &context) {
     }
     case POWER:
     {
-        int result = 1;
-        for(int i = 0; i < right; i++) {
-            result *= left;
-        }
+        int result = pow(left, right);
         return result;
     }
     default: break;
